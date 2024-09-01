@@ -20,15 +20,13 @@
 </style>
 <div class="container">
 	<center>
-		<h3><i class="fa fa-check-circle-o text-success" aria-hidden="true"></i> Payment Succeed, You has been make payment successfuly.</h3>
-		<div class="counter-wrapper">Redirect to your dashboard in <span class="bg-counter" id="counter">8</span></div>
+		<h3><i class="fa fa-check-circle-o text-success" aria-hidden="true"></i> Paiement réussi, vous avez effectué le paiement avec succès.</h3>
+		<div class="counter-wrapper">Redirection vers votre tableau de bord dans <span class="bg-counter" id="counter">8</span></div>
 	</center>
-
 </div>
 {% endblock content %}
 
 {% block js %}
-
 <script type="text/javascript">
 	var counterEl = document.getElementById('counter');
 	var num = parseInt(counterEl.innerText);
@@ -44,5 +42,4 @@
 		window.location = "/";
 	}
 </script>
-
 {% endblock %}

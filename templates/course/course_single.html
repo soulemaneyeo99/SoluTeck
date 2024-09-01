@@ -1,13 +1,17 @@
+Voici la traduction pour un public francophone, en laissant de côté les mots-clés :
+
+---
+
 {% extends 'base.html' %}
-{% block title %}{{ title }} | Learning management system{% endblock title %}
+{% block title %}{{ title }} | Système de gestion de l'apprentissage{% endblock title %}
 {% load static %}
 
 {% block content %}
 
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="fil d'Ariane">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'programs' %}">Programs</a></li>
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'programs' %}">Programmes</a></li>
         <li class="breadcrumb-item"><a href="{% url 'program_detail' course.program.id %}">{{ course.program }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ course }}</li>
     </ol>
@@ -18,21 +22,21 @@
         <div class="">
             {% if request.user.is_superuser %}
             <a class="btn btn-sm btn-light" href="{% url 'edit_course' course.slug %}">
-                <i class="fas fa-pencil-alt"></i> Edit course
+                <i class="fas fa-pencil-alt"></i> Modifier le cours
             </a>
             {% endif %}
             {% if request.user.is_superuser or request.user.is_lecturer %}
             <a class="btn btn-sm btn-primary" href="{% url 'upload_file_view' course.slug %}"><i class="fas fa-plus"></i>
-                Upload new file
+                Télécharger un nouveau fichier
             </a>
             <a class="btn btn-sm btn-primary" href="{% url 'upload_video' course.slug %}"><i class="fas fa-plus"></i>
-                Upload new video
+                Télécharger une nouvelle vidéo
             </a>
             {% endif %}
         </div>
         <div class="ms-auto">
             <a class="btn btn-sm btn-warning" href="{% url 'quiz_index' course.slug %}"><i class="fas fa-list"></i>
-                Take a Quiz
+                Passer un Quiz
             </a>
         </div>
     </div>
@@ -47,15 +51,15 @@
 
     <div class="row mb-5">
         <div class="col-md-12 p-0">
-            <p class="form-title m-0">Video Tutorials</p>
+            <p class="form-title m-0">Tutoriels Vidéo</p>
             <div class="table-responsive">
                 <table class="table table-shadow table-light table-striped m-0">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Video Title</th>
-                            <th>Uploaded Date</th>
-                            <th>Get Started</th>
+                            <th>Titre de la Vidéo</th>
+                            <th>Date de Téléchargement</th>
+                            <th>Commencer</th>
                             {% if request.user.is_superuser or request.user.is_lecturer %}
                             <th>Actions</th>
                             {% endif %}
@@ -74,8 +78,8 @@
                             <th>
                                 <div>
                                     <a class="download-btn" href="{{ video.get_absolute_url }}"
-                                        title="Download to your device">
-                                        <i class="fas fa-play me-1"></i>Play now</a>
+                                        title="Télécharger sur votre appareil">
+                                        <i class="fas fa-play me-1"></i>Lire maintenant</a>
                                 </div>
                             </th>
 
@@ -83,11 +87,11 @@
                             <td>
                                 <div class="update-delete">
                                     <a href="{% url 'upload_video_edit' slug=course.slug video_slug=video.slug %}"
-                                        class="update" title="Edit">
+                                        class="update" title="Modifier">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                     <a href="{% url 'upload_video_delete' slug=course.slug video_slug=video.slug %}"
-                                        class="delete" title="Delete">
+                                        class="delete" title="Supprimer">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </div>
@@ -100,11 +104,11 @@
                             <td></td>
                             <td>
                                 <span class="text-danger">
-                                    No video Uploaded.
+                                    Aucune vidéo téléchargée.
                                     {% if request.user.is_superuser or request.user.is_lecturer %}
                                     <a href="{% url 'upload_video' course.slug %}">
                                         <i class="primary" style="font-size: 22px;">
-                                            Upload now.
+                                            Télécharger maintenant.
                                         </i>
                                         {% endif %}
                                     </a>
@@ -129,10 +133,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>File name</th>
-                            <th>Uploaded Date</th>
-                            <th>Updated Date</th>
-                            <th>Downloads</th>
+                            <th>Nom du Fichier</th>
+                            <th>Date de Téléchargement</th>
+                            <th>Date de Mise à Jour</th>
+                            <th>Téléchargements</th>
                             {% if request.user.is_superuser or request.user.is_lecturer %}
                             <th>Actions</th>
                             {% endif %}
@@ -151,8 +155,8 @@
                             <td>{{ file.updated_date|date }}</td>
                             <th>
                                 <div>
-                                    <a class="download-btn" href="{{ file.file.url }}" title="Download to your device">
-                                        <i class="fas fa-download me-1"></i>Download</a>
+                                    <a class="download-btn" href="{{ file.file.url }}" title="Télécharger sur votre appareil">
+                                        <i class="fas fa-download me-1"></i>Télécharger</a>
                                 </div>
                             </th>
 
@@ -160,11 +164,11 @@
                             <td>
                                 <div class="update-delete">
                                     <a href="{% url 'upload_file_edit' slug=course.slug file_id=file.pk %}"
-                                        class="update" title="Edit">
+                                        class="update" title="Modifier">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                     <a href="{% url 'upload_file_delete' slug=course.slug file_id=file.pk %}"
-                                        class="delete" title="Delete">
+                                        class="delete" title="Supprimer">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </div>
@@ -177,11 +181,11 @@
                             <td></td>
                             <td>
                                 <span class="text-danger">
-                                    No File Uploaded.
+                                    Aucun Fichier Téléchargé.
                                     {% if request.user.is_superuser or request.user.is_lecturer %}
                                     <a href="{% url 'upload_file_view' course.slug %}">
                                         <i class="primary" style="font-size: 22px;">
-                                            Upload now.
+                                            Télécharger maintenant.
                                         </i>
                                         {% endif %}
                                     </a>
@@ -201,7 +205,7 @@
 </div>
 
 <div class="site-section mb-5 mt-4">
-    <div class="title-1">Lecturer(s)</div>
+    <div class="title-1">Lecteur(s)</div>
     <br>
     <br>
     <div class="container-fluid">
@@ -227,10 +231,7 @@
                     </div>
                 </div>
             </div>
-            {% empty %}
-            <h6 class="text-muted mt-3">No lecturer assigned for this course</h6>
             {% endfor %}
-
         </div>
     </div>
 </div>

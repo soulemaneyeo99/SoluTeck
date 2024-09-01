@@ -7,7 +7,7 @@
 
   .table th, .table td {
     padding: 8px;
-    border: 1px solid #ddd; /* Add thin borders for separation */
+    border: 1px solid #ddd; /* Ajouter des bordures fines pour la séparation */
     text-align: left;
   }
 
@@ -31,23 +31,23 @@
 
 </style>
 
-<p class="title-1">Students</p>
+<p class="title-1">Étudiants</p>
 
 <div>
   <table class="table">
     <thead>
       <tr>
         <th>ID No.</th>
-        <th>Full Name</th>
+        <th>Nom Complet</th>
         <th>Email</th>
-        <th>Mob No.</th>
-        <th>Program</th>
+        <th>Tél No.</th>
+        <th>Programme</th>
       </tr>
     </thead>
     <tbody>
       {% for student in students %}
       <tr>
-        <td> {{ forloop.counter }}.</td>
+        <td>{{ forloop.counter }}.</td>
         <td>{{ student.student.username }}</td>
         <td><a href="{% url 'profile_single' student.id %}">{{ student.student.get_full_name }}</a></td>
         <td>{{ student.student.email }}</td>
@@ -57,7 +57,7 @@
       <tr>
         <td>
           <span class="text-danger">
-            No Lecturer(s).
+            Aucun Étudiant.
           </span>
         </td>
       </tr>

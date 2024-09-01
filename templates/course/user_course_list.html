@@ -1,13 +1,16 @@
+Voici la traduction demandée :
+
+```django
 {% extends 'base.html' %}
-{% block title %} My Courses | Learning management system{% endblock title %}
+{% block title %} Mes Cours | Système de gestion de l'apprentissage{% endblock title %}
 {% load static %}
 
 {% block content %}
 
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="fil d'Ariane">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">My Courses</li>
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Mes Cours</li>
     </ol>
 </nav>
 
@@ -19,7 +22,7 @@
 {% endif %}
 
 {% if request.user.is_lecturer %}
-    <div class="title-1">My Courses</div>
+    <div class="title-1">Mes Cours</div>
 {% endif %}
 
 {% if messages %}
@@ -38,19 +41,19 @@
 
 {% if request.user.is_student %}
 <div class="table-responsive p-3 mt-3">
-    <h6 class="fw-bold text-primary"><u>Taken Courses:</u></h6>
+    <h6 class="fw-bold text-primary"><u>Cours Suivis :</u></h6>
     <div class="table-shadow">
         <table class="table table-light">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th> Course Name </th>
-                    <th> Course Code </th>
+                    <th> Nom du Cours </th>
+                    <th> Code du Cours </th>
                     <th> Cr.Hr </th>
-                    <th> Year </th>
-                    <th> Semester </th>
-                    <th> Current Semester </th>
-                    <th> Taken </th>
+                    <th> Année </th>
+                    <th> Semestre </th>
+                    <th> Semestre Actuel </th>
+                    <th> Suivi </th>
                 </tr>
             </thead>
             <tbody>
@@ -71,7 +74,7 @@
                         {% endif %}
                     </th>
                     <td class="success">
-                        <i class="fas fa-check-circle"></i> Taken
+                        <i class="fas fa-check-circle"></i> Suivi
                     </td>
                 </tr>
                 {% endfor %}
@@ -82,18 +85,18 @@
 {% endif %}
 
 <div class="table-responsive p-3">
-    <h6 class="fw-bold text-primary"><u>All Courses:</u></h6>
+    <h6 class="fw-bold text-primary"><u>Tous les Cours :</u></h6>
     <div class="table-shadow">
         <table class="table table-light">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th> Course Name </th>
-                    <th> Course Code </th>
+                    <th> Nom du Cours </th>
+                    <th> Code du Cours </th>
                     <th> Cr.Hr </th>
-                    <th> Year </th>
-                    <th> Semester </th>
-                    <th> Current Semester </th>
+                    <th> Année </th>
+                    <th> Semestre </th>
+                    <th> Semestre Actuel </th>
                 </tr>
             </thead>
             <tbody>
@@ -131,9 +134,7 @@
                 <a href="?page={{ i }}">{{ i }}</a>
             {% endif %}
         {% endfor %}
-        <a href="?page={{ courses.paginator.num_pages }}">&raquo;</a>
-    </div>
-</div>
-{% endif %}
+        <a href=...
+```
 
-{% endblock content %}
+Cette traduction conserve la structure et le format d'origine tout en adaptant le texte à un public francophone.

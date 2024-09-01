@@ -1,21 +1,20 @@
 {% extends "base.html" %}
-{% load i18n%}
+{% load i18n %}
 
-
-{% block title %} {{ quiz.title }} | Learning management system {% endblock %}
+{% block title %} {{ quiz.title }} | Système de gestion de l'apprentissage {% endblock %}
 {% block description %} {{ quiz.title }} - {{ quiz.description }} {% endblock %}
 
 {% block content %}
 
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="/">Home</a></li>
-		<li class="breadcrumb-item"><a href="{% url 'programs' %}">Programs</a></li>
-		<li class="breadcrumb-item"><a href="{% url 'program_detail' course.program.id %}">{{ course.program }}</a></li>
-		<li class="breadcrumb-item"><a href="{{ course.get_absolute_url }}">{{ course }}</a></li>
-		<li class="breadcrumb-item"><a href="{% url 'quiz_index' course.slug %}">Quizzes</a></li>
-		<li class="breadcrumb-item active" aria-current="page">{{ quiz.title|title }}</li>
-	</ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'programs' %}">Programmes</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'program_detail' course.program.id %}">{{ course.program }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ course.get_absolute_url }}">{{ course }}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'quiz_index' course.slug %}">Quiz</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ quiz.title|title }}</li>
+    </ol>
 </nav>
 
 <div class="title-1">{{ quiz.title|title|truncatechars:25 }}</div>
@@ -23,31 +22,30 @@
 
 <div class="container">
 
-	{% if previous.answers %}
+    {% if previous.answers %}
 
-	<p class="muted"><small>{% trans "The previous question" %}:</small></p>
-	<p>{{ previous.previous_question }}</p>
+    <p class="muted"><small>{% trans "La question précédente" %}:</small></p>
+    <p>{{ previous.previous_question }}</p>
 
-	{% if previous.previous_outcome %}
-		<div class="alert alert-success">
-	{% else %}
-		<div class="alert alert-warning">
-	{% endif %}
-		<p><small>
-			{% trans "Your answer was" %} </small>
-			<strong>
-			{{ previous.previous_outcome|yesno:"correct,incorrect" }}
-			</strong>
-		</p>
-
-		</div>
-		
+    {% if previous.previous_outcome %}
+        <div class="alert alert-success">
+    {% else %}
+        <div class="alert alert-warning">
+    {% endif %}
+        <p><small>
+            {% trans "Votre réponse était" %} </small>
+            <strong>
+            {{ previous.previous_outcome|yesno:"correcte,incorrecte" }}
+            </strong>
+        </p>
+        </div>
+        
         {% load i18n %}
         {% if previous.answers %}
 
           {% if user_was_incorrect %}
             <div class="alert alert-error">
-              <strong>{% trans "You answered the above question incorrectly" %}</strong>
+              <strong>{% trans "Vous avez répondu incorrectement à la question ci-dessus" %}</strong>
             </div>
           {% endif %}
 
@@ -57,7 +55,7 @@
                 {% if answer.correct %}
                   <tr class="success">
                     <td>{{ answer }}</td>
-                  <td><strong>{% trans "This is the correct answer" %}</strong></td>
+                    <td><strong>{% trans "Ceci est la bonne réponse" %}</strong></td>
 				  </tr>
                 {% else %}
                   <tr>
@@ -65,7 +63,7 @@
                     <td>
                     {% if previous.question_type.MCQuestion %}
                       {% if answer.id|add:"0" == previous.previous_answer|add:"0" %}
-                        {% trans "This was your answer." %}
+                        {% trans "C'était votre réponse." %}
                       {% endif %}
                     {% endif %}
                     </td>
@@ -75,22 +73,16 @@
             </tbody>
           </table>
         {% endif %}
-		
-
-        <p><strong>{% trans "Explanation" %}:</strong></p>
+        
+        <p><strong>{% trans "Explication" %}:</strong></p>
         <p class="p-2" style="background-color: #fcf8e3;">
           {% if previous.previous_question.explanation %}
             {{ previous.previous_question.explanation }}
           {% else %}
-            {% trans "No explanation set to this question." %}
+            {% trans "Aucune explication définie pour cette question." %}
           {% endif %}
 		</p>
 		
-		<!-- <p><strong>{% trans "Explanation" %}:</strong></p>
-		<div class="well " style="background-color: #fcf8e3;">
-		<p>{{ previous.previous_question.explanation }}</p>
-		</div> -->
-
 		<hr>
 
 	{% endif %}
@@ -105,15 +97,14 @@
 		<div class="modal-dialog">
 		  <div class="modal-content">
 			<div class="modal-header">
-			  <h1 class="modal-title fs-5" id="instractionModalLabel">Quiz instractions</h1>
-			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  <h1 class="modal-title fs-5" id="instractionModalLabel">{% trans "Instructions du Quiz" %}</h1>
+			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
 			</div>
 			<div class="modal-body">
-				You can't go back to the previous question after you submit it, 
-				so double check your answer before proceeding to the next one!
+				{% trans "Vous ne pouvez pas revenir à la question précédente après l'avoir soumise, donc vérifiez bien votre réponse avant de passer à la suivante !" %}
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+			  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">{% trans "Compris" %}</button>
 			</div>
 		  </div>
 		</div>
@@ -122,12 +113,12 @@
 
 	{% if progress %}
 	<div class="text-light rounded small px-2 bg-danger" style="float: right;">
-	{% trans "Question" %} {{ progress.0|add:1 }} {% trans "of" %} {{ progress.1 }}
+	{% trans "Question" %} {{ progress.0|add:1 }} {% trans "sur" %} {{ progress.1 }}
 	</div>
 	{% endif %}
 
 	<p>
-		<small class="muted">{% trans "Quiz category" %}:</small>
+		<small class="muted">{% trans "Catégorie du quiz" %}:</small>
 		<strong>{{ quiz.category }}</strong>
 	</p>
 
@@ -153,8 +144,7 @@
 
 				</ul>
 				<br>
-				<input type="submit" value={% trans "Check" %} class="btn btn-large btn-block btn-primary" />
-				<!-- <input type="submit" value={% trans "Previous" %} class="btn btn-large btn-block btn-outline-primary" > -->
+				<input type="submit" value={% trans "Vérifier" %} class="btn btn-large btn-block btn-primary" />
 			</form>
 		</div>
 

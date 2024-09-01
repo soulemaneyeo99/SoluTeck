@@ -1,22 +1,26 @@
+Voici la traduction pour un public francophone, en laissant de côté les mots-clés :
+
+---
+
 {% extends 'base.html' %}
-{% block title %}{{ title }} | Learning management system{% endblock title %}
+{% block title %}{{ title }} | Système de gestion de l'apprentissage{% endblock title %}
 
 {% block content %}
 
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="fil d'Ariane">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Semester list</li>
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Liste des semestres</li>
     </ol>
 </nav>
 
 {% if request.user.is_superuser %}
 <div class="manage-wrap">
-    <a class="btn btn-primary" href="{% url 'add_semester' %}"><i class="fas fa-plus"></i>Add New Semester</a>
+    <a class="btn btn-primary" href="{% url 'add_semester' %}"><i class="fas fa-plus"></i>Ajouter un nouveau semestre</a>
 </div>
 {% endif %}
 
-<div class="title-1"><i class="fas fa-calendar-alt"></i>Semester List</div>
+<div class="title-1"><i class="fas fa-calendar-alt"></i>Liste des semestres</div>
 
 {% if messages %}
 {% for message in messages %}
@@ -37,10 +41,10 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th> Semester </th>
-                <th> Is Current semester </th>
+                <th> Semestre </th>
+                <th> Semestre actuel </th>
                 <th> Session </th>
-                <th> Next Semester Begins </th>
+                <th> Début du prochain semestre </th>
                 {% if request.user.is_superuser %}
                 <th> Actions </th>
                 {% endif %}
@@ -65,9 +69,9 @@
                 {% if request.user.is_superuser %}
                 <td>
                     <div class="update-delete">
-                        <a href="{% url 'edit_semester' pk=semester.pk %}" class="update" title="Edit"><i
+                        <a href="{% url 'edit_semester' pk=semester.pk %}" class="update" title="Modifier"><i
                                 class="fas fa-pencil-alt"></i></a>
-                        <a href="{% url 'delete_semester' pk=semester.pk %}" class="delete" title="Delete"><i
+                        <a href="{% url 'delete_semester' pk=semester.pk %}" class="delete" title="Supprimer"><i
                                 class="fas fa-trash-alt"></i></a>
                     </div>
                 </td>
@@ -79,11 +83,11 @@
                 <td></td>
                 <td>
                     <span class="text-danger">
-                        No Semester.
+                        Aucun semestre.
                         {% if request.user.is_superuser %}
                         <a href="{% url 'add_semester' %}">
                             <i class="primary" style="font-size: 22px;">
-                                Add Semester Now.
+                                Ajouter un semestre maintenant.
                             </i>
                             {% endif %}
                         </a>

@@ -1,5 +1,9 @@
+Voici la traduction pour un public francophone, en laissant de côté les mots-clés :
+
+---
+
 {% extends 'base.html' %}
-{% block title %} Dashboard | Learning management system {% endblock title %}
+{% block title %} Tableau de bord | Système de gestion de l'apprentissage {% endblock title %}
 {% load static %}
 
 {% block header %}
@@ -7,10 +11,10 @@
 
 {% block content %}
 
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="fil d'Ariane">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Tableau de bord</li>
     </ol>
 </nav>
 
@@ -29,18 +33,18 @@
 {% endif %}
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-	<h1 class="title-1">Dashboard</h1>
+	<h1 class="title-1">Tableau de bord</h1>
 	<div class="dropdown">
 		<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
 			aria-expanded="false">
 			<i class="fas fa-cog"></i>
 		</button>
 		<div class="dropdown-menu">
-			<h6 class="dropdown-header">Dashboard settings</h6>
-			<button class="dropdown-item active" type="button">Display grid</button>
-			<button class="dropdown-item" type="button">Display table</button>
+			<h6 class="dropdown-header">Paramètres du tableau de bord</h6>
+			<button class="dropdown-item active" type="button">Afficher la grille</button>
+			<button class="dropdown-item" type="button">Afficher le tableau</button>
 			<hr>
-			<button class="dropdown-item" type="button">Manage dashboard</button>
+			<button class="dropdown-item" type="button">Gérer le tableau de bord</button>
 		</div>
 	</div>
 </div>
@@ -50,7 +54,7 @@
 		<div class="card-count p-3">
 			<h3><i class="fas fa-users bg-light-aqua"></i></h3>
 			<div class="text-right">
-				Students
+				Étudiants
 				<h2>{{ student_count }}</h2>
 			</div>
 		</div>
@@ -59,7 +63,7 @@
 		<div class="card-count p-3">
 			<h3><i class="fas fa-users bg-light-orange"></i></h3>
 			<div class="text-right">
-				Lecturers
+				Enseignants
 				<h2>{{ lecturer_count }}</h2>
 			</div>
 		</div>
@@ -68,7 +72,7 @@
 		<div class="card-count p-3">
 			<h3><i class="fas fa-users bg-light-red"></i></h3>
 			<div class="text-right">
-				Administrators
+				Administrateurs
 				<h2>{{ superuser_count }}</h2>
 			</div>
 		</div>
@@ -77,7 +81,7 @@
 		<div class="card-count p-3">
 			<h3><i class="fas fa-users bg-light-purple"></i></h3>
 			<div class="text-right">
-				Lab Assistance
+				Aide de laboratoire
 				<h2>500</h2>
 			</div>
 		</div>
@@ -86,7 +90,7 @@
 		<div class="card-count p-3">
 			<h3><i class="fas fa-users bg-light-red"></i></h3>
 			<div class="text-right">
-				Librarians
+				Bibliothécaires
 				<h2>300</h2>
 			</div>
 		</div>
@@ -95,7 +99,7 @@
 		<div class="card-count p-3">
 			<h3><i class="fas fa-users bg-light-purple"></i></h3>
 			<div class="text-right">
-				Supervisors
+				Superviseurs
 				<h2>660</h2>
 			</div>
 		</div>
@@ -104,7 +108,7 @@
 		<div class="card-count p-3">
 			<h3><i class="fas fa-users bg-light-orange"></i></h3>
 			<div class="text-right pl-2">
-				Office Assistance
+				Aide de bureau
 				<h2>1,700</h2>
 			</div>
 		</div>
@@ -113,7 +117,7 @@
 		<div class="card-count p-3">
 			<h3><i class="fas fa-users bg-light-aqua"></i></h3>
 			<div class="text-right">
-				Others
+				Autres
 				<h2>1,250</h2>
 			</div>
 		</div>
@@ -141,12 +145,12 @@
 	</div>
 	<div class="col-md-6 p-2">
 		<div class="card w-100 h-100 p-3">
-			<h5>Latest activities</h5>
+			<h5>Dernières activités</h5>
 			<ul class="ps-2 small">
 				{% for log in logs %}
 				<li>{{ log.message }} <span class="text-muted">- {{ log.created_at }}</span></li>
 				{% empty %}
-				<li>No recent activity</li>
+				<li>Aucune activité récente</li>
 				{% endfor %}
 			</ul>
 		</div>
@@ -154,7 +158,7 @@
 </div>
 <br>
 <div class="bg-white p-3">
-	<h5 class="border-bottom pb-2">School Demographics</h5>
+	<h5 class="border-bottom pb-2">Démographie de l'école</h5>
 	<div class="row">
 		<div class="col-md-4">
 			<i class="fas fa-expand-alt"></i>
@@ -183,37 +187,37 @@
 	
 	$(document).ready(function () {
 
-		// Setup
+		// Configuration
 		const labels = [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
+			'Janvier',
+			'Février',
+			'Mars',
+			'Avril',
+			'Mai',
+			'Juin',
 		];
 		const data = {
 			labels: labels,
 			datasets: [{
-				label: 'Students',
+				label: 'Étudiants',
 				backgroundColor: 'rgba(86, 224, 224, 0.5)',
 				borderColor: 'rgb(86, 224, 224)',
 				hoverBorderWidth: 3,
 				data: [0, 10, 5, 2, 20, 30, 45]
 			}, {
-				label: 'Teachers',
+				label: 'Enseignants',
 				backgroundColor: 'rgba(253, 174, 28, 0.5)',
 				borderColor: 'rgb(253, 174, 28)',
 				hoverBorderWidth: 3,
 				data: [20, 0, 15, 4, 6, 4, 60],
 			}, {
-				label: 'Admins',
+				label: 'Administrateurs',
 				backgroundColor: 'rgba(203, 31, 255, 0.5)',
 				borderColor: 'rgb(203, 31, 255)',
 				hoverBorderWidth: 3,
 				data: [85, 30, 34, 20, 20, 55, 45],
 			}, {
-				label: 'Stuffs',
+				label: 'Personnel',
 				backgroundColor: 'rgba(255, 19, 157, 0.5)',
 				borderColor: 'rgb(255, 19, 157)',
 				hoverBorderWidth: 3,
@@ -229,14 +233,14 @@
 				plugins: {
 					title: {
 						display: true,
-						text: 'Website Traffic',
+						text: 'Trafic du site',
 						padding: 15
 					}
 				}
 			}
 		});
 
-		// Setup
+		// Configuration
 		const labelsEnrollment = [
 			'2016',
 			'2017',
@@ -260,19 +264,19 @@
 				hoverBorderWidth: 3,
 				data: [20, 0, 15, 4, 6, 4, 60],
 			}, {
-				label: 'Civil Eng',
+				label: 'Ingénierie civile',
 				backgroundColor: 'rgba(203, 31, 255, 0.5)',
 				borderColor: 'rgb(203, 31, 255)',
 				hoverBorderWidth: 3,
 				data: [85, 30, 34, 20, 20, 55, 45],
 			}, {
-				label: 'Accounting',
+				label: 'Comptabilité',
 				backgroundColor: 'rgba(255, 19, 157, 0.5)',
 				borderColor: 'rgb(255, 19, 157)',
 				hoverBorderWidth: 3,
 				data: [45, 75, 70, 80, 20, 30, 90],
 			}, {
-				label: 'Business M.',
+				label: 'Gestion des affaires',
 				backgroundColor: 'rgba(0, 0, 0, 0.5)',
 				borderColor: 'rgb(0, 0, 0)',
 				hoverBorderWidth: 3,
@@ -288,14 +292,14 @@
 				plugins: {
 					title: {
 						display: true,
-						text: 'Enrollment per course',
+						text: 'Inscription par cours',
 						padding: 20
 					}
 				}
 			}
 		});
 
-		// Average grade setup
+		// Configuration des notes moyennes
 		const labelsGrade = [
 			'2017',
 			'2018',
@@ -306,25 +310,25 @@
 		const dataGrade = {
 			labels: labelsGrade,
 			datasets: [{
-				label: "Comp sci.",
+				label: "Informatique",
 				backgroundColor: 'rgba(86, 224, 224, 0.5)',
 				borderColor: 'rgb(86, 224, 224)',
 				hoverBorderWidth: 3,
 				data: [0, 10, 5, 2, 20, 30, 45]
 			}, {
-				label: "Civil eng.",
+				label: "Ingénierie civile",
 				backgroundColor: 'rgba(253, 174, 28, 0.5)',
 				borderColor: 'rgb(253, 174, 28)',
 				hoverBorderWidth: 3,
 				data: [20, 0, 15, 4, 6, 4, 60],
 			}, {
-				label: "Architect.",
+				label: "Architecture",
 				backgroundColor: 'rgba(203, 31, 255, 0.5)',
 				borderColor: 'rgb(203, 31, 255)',
 				hoverBorderWidth: 3,
 				data: [85, 30, 34, 20, 20, 55, 45],
 			}, {
-				label: "Economics",
+				label: "Économie",
 				backgroundColor: 'rgba(255, 19, 157, 0.5)',
 				borderColor: 'rgb(255, 19, 157)',
 				hoverBorderWidth: 3,
@@ -340,7 +344,7 @@
 				plugins: {
 					title: {
 						display: true,
-						text: 'Students average grade (performance)',
+						text: 'Note moyenne des étudiants (performance)',
 						padding: 20
 					}
 				}
@@ -349,11 +353,11 @@
 
 		const dataGender = {
 			labels: [
-				'Man',
-				'Women'
+				'Hommes',
+				'Femmes'
 			],
 			datasets: [{
-				label: "Students Gender Dataset",
+				label: "Dataset de genre des étudiants",
 				data: [malesCount, femalesCount],
 				backgroundColor: [
 				'rgb(255, 99, 132)',
@@ -371,7 +375,7 @@
 				plugins: {
 					title: {
 						display: true,
-						text: 'Students Gender',
+						text: 'Genre des étudiants',
 						padding: 20
 					}
 				}
@@ -380,12 +384,12 @@
 
 		const dataQualification = {
 			labels: [
-				'PHD',
-				'Masters',
-				'BSc degree'
+				'DOC',
+				'Mastère',
+				'Diplôme de licence'
 			],
 			datasets: [{
-				label: "Lecturer Qualifications Dataset",
+				label: "Dataset des qualifications des enseignants",
 				data: [24, 30, 26],
 				backgroundColor: [
 				'rgb(255, 99, 132)',
@@ -403,7 +407,7 @@
 				plugins: {
 					title: {
 						display: true,
-						text: 'Lecturer qualifications',
+						text: 'Qualifications des enseignants',
 						padding: 20
 					}
 				}
@@ -412,12 +416,12 @@
 
 		const dataLevels = {
 			labels: [
-				'PHD',
-				'Masters',
-				'BSc degree'
+				'DOC',
+				'Mastère',
+				'Diplôme de licence'
 			],
 			datasets: [{
-				label: "Students level",
+				label: "Niveau des étudiants",
 				data: [14, 30, 56],
 				backgroundColor: [
 				'rgb(255, 99, 132)',
@@ -435,7 +439,7 @@
 				plugins: {
 					title: {
 						display: true,
-						text: 'Student levels',
+						text: 'Niveaux des étudiants',
 						padding: 20
 					}
 				}

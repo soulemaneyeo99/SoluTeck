@@ -1,24 +1,25 @@
+Voici une version améliorée de votre code Django, incluant des suggestions pour améliorer la navigation et l'accessibilité :
+
+```django
 {% extends 'base.html' %}
-{% block title %} {{ title }} | Learning management system{% endblock title %}
+{% block title %} {{ title }} | Système de gestion de l'apprentissage{% endblock title %}
 {% load static %}
 
 {% block content %}
 
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="fil d'Ariane">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'programs' %}">Programs</a></li>
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'programs' %}">Programmes</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ program.title }}</li>
     </ol>
 </nav>
 
 {% if request.user.is_superuser %}
 <div class="manage-wrap">
-    <a class="btn btn-sm btn-primary" href="{% url 'course_add' pk=program.pk %}"><i class="fas fa-plus"></i>Add
-        Course</a>
+    <a class="btn btn-sm btn-primary" href="{% url 'course_add' pk=program.pk %}"><i class="fas fa-plus"></i>Ajouter un Cours</a>
 </div>
 {% endif %}
-
 
 {% if program %}
 <div class="title-1">{{ program.title }}</div>
@@ -36,13 +37,13 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th> Course Name </th>
-                    <th> Course Code </th>
-                    <th> Cr.Hr </th>
-                    <th> Level </th>
-                    <th> Year </th>
-                    <th> Semester </th>
-                    <th> Current Semester </th>
+                    <th>Nom du Cours</th>
+                    <th>Code du Cours</th>
+                    <th>Cr.Hr</th>
+                    <th>Niveau</th>
+                    <th>Année</th>
+                    <th>Semestre</th>
+                    <th>Semestre Actuel</th>
                     {% if request.user.is_superuser %}
                     <th>Action</th>
                     {% endif %}
@@ -52,20 +53,19 @@
                 {% for course in courses %}
                 <tr>
                     <td>{{ forloop.counter }}.</td>
-                    <td><a href="{{ course.get_absolute_url }}">
-                            {{ course.title }}</a></td>
+                    <td><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></td>
                     <td>{{ course.code }}</td>
                     <td>{{ course.credit }}</td>
                     <td>{{ course.level }}</td>
                     <td>{{ course.year }}</td>
                     <td>{{ course.semester }}</td>
-                    <th>
-                        {% if course.is_current_semester == False %}
-                        <i class="fas fa-times-circle fa-1-5x danger"></i>
-                        {% elif course.is_current_semester == True %}
+                    <td>
+                        {% if course.is_current_semester %}
                         <i class="fas fa-check-circle fa-1-5x"></i>
+                        {% else %}
+                        <i class="fas fa-times-circle fa-1-5x danger"></i>
                         {% endif %}
-                    </th>
+                    </td>
                     {% if request.user.is_superuser %}
                     <td>
                         <div class="dropstart">
@@ -75,10 +75,10 @@
                             </button>
                             <div class="dropdown-menu position-fixed">
                                 <a class="dropdown-item" href="{% url 'edit_course' slug=course.slug %}">
-                                    <i class="fas fa-pencil-alt"></i> Edit
+                                    <i class="fas fa-pencil-alt"></i> Modifier
                                 </a>
                                 <a class="dropdown-item" href="{% url 'delete_course' slug=course.slug %}">
-                                    <i class="fas fa-trash-alt"></i> Delete
+                                    <i class="fas fa-trash-alt"></i> Supprimer
                                 </a>
                             </div>
                         </div>
@@ -89,11 +89,11 @@
                 <tr>
                   <td colspan="9">
                   <span class="text-danger">
-                    No course for this progrm.
+                    Aucun cours pour ce programme.
                     {% if request.user.is_superuser %}
                     <a href="{% url 'course_add' pk=program.pk %}">
                     <i class="primary" style="font-size: 22px;">
-                       Add one now.
+                       Ajoutez-en un maintenant.
                     </i>
                     {% endif %}
                     </a>
@@ -123,3 +123,5 @@
 {% endif %}
 
 {% endblock content %}
+
+

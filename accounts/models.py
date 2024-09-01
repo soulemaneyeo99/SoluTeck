@@ -9,32 +9,30 @@ from course.models import Program
 from .validators import ASCIIUsernameValidator
 
 
-# LEVEL_COURSE = "Level course"
-BACHELOR_DEGREE = "Bachelor"
+BACHELOR_DEGREE = "Licence"
 MASTER_DEGREE = "Master"
 
 LEVEL = (
-    # (LEVEL_COURSE, "Level course"),
-    (BACHELOR_DEGREE, "Bachelor Degree"),
-    (MASTER_DEGREE, "Master Degree"),
+    (BACHELOR_DEGREE, "Diplôme de Licence"),
+    (MASTER_DEGREE, "Diplôme de Master"),
 )
 
-FATHER = "Father"
-MOTHER = "Mother"
-BROTHER = "Brother"
-SISTER = "Sister"
-GRAND_MOTHER = "Grand mother"
-GRAND_FATHER = "Grand father"
-OTHER = "Other"
+FATHER = "Père"
+MOTHER = "Mère"
+BROTHER = "Frère"
+SISTER = "Sœur"
+GRAND_MOTHER = "Grand-mère"
+GRAND_FATHER = "Grand-père"
+OTHER = "Autre"
 
 RELATION_SHIP = (
-    (FATHER, "Father"),
-    (MOTHER, "Mother"),
-    (BROTHER, "Brother"),
-    (SISTER, "Sister"),
-    (GRAND_MOTHER, "Grand mother"),
-    (GRAND_FATHER, "Grand father"),
-    (OTHER, "Other"),
+    (FATHER, "Père"),
+    (MOTHER, "Mère"),
+    (BROTHER, "Frère"),
+    (SISTER, "Sœur"),
+    (GRAND_MOTHER, "Grand-mère"),
+    (GRAND_FATHER, "Grand-père"),
+    (OTHER, "Autre"),
 )
 
 
@@ -50,7 +48,7 @@ class CustomUserManager(UserManager):
             )
             queryset = queryset.filter(
                 or_lookup
-            ).distinct()  # distinct() is often necessary with Q lookups
+            ).distinct()  # distinct() est souvent nécessaire avec les recherches Q
         return queryset
 
     def get_student_count(self):
@@ -63,7 +61,7 @@ class CustomUserManager(UserManager):
         return self.model.objects.filter(is_superuser=True).count()
 
 
-GENDERS = (("M", "Male"), ("F", "Female"))
+GENDERS = (("M", "Homme"), ("F", "Femme"))
 
 
 class User(AbstractUser):
@@ -101,9 +99,9 @@ class User(AbstractUser):
         if self.is_superuser:
             role = "Admin"
         elif self.is_student:
-            role = "Student"
+            role = "Étudiant"
         elif self.is_lecturer:
-            role = "Lecturer"
+            role = "Lecteur"
         elif self.is_parent:
             role = "Parent"
 
@@ -144,13 +142,12 @@ class StudentManager(models.Manager):
             or_lookup = Q(level__icontains=query) | Q(program__icontains=query)
             qs = qs.filter(
                 or_lookup
-            ).distinct()  # distinct() is often necessary with Q lookups
+            ).distinct()  # distinct() est souvent nécessaire avec les recherches Q
         return qs
 
 
 class Student(models.Model):
     student = models.OneToOneField(User, on_delete=models.CASCADE)
-    # id_number = models.CharField(max_length=20, unique=True, blank=True)
     level = models.CharField(max_length=25, choices=LEVEL, null=True)
     program = models.ForeignKey(Program, on_delete=models.CASCADE, null=True)
 
@@ -180,19 +177,19 @@ class Student(models.Model):
 
 class Parent(models.Model):
     """
-    Connect student with their parent, parents can
-    only view their connected students information
+    Connecter l'étudiant avec son parent, les parents peuvent
+    uniquement voir les informations de leurs étudiants connectés
     """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     student = models.OneToOneField(Student, null=True, on_delete=models.SET_NULL)
-    first_name = models.CharField(max_length=120)
-    last_name = models.CharField(max_length=120)
+    prénom = models.CharField(max_length=120)
+    nom  = models.CharField(max_length=120)
     phone = models.CharField(max_length=60, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
 
-    # What is the relationship between the student and
-    # the parent (i.e. father, mother, brother, sister)
+    # Quelle est la relation entre l'étudiant et
+    # le parent (i.e. père, mère, frère, sœur)
     relation_ship = models.TextField(choices=RELATION_SHIP, blank=True)
 
     class Meta:
@@ -210,4 +207,5 @@ class DepartmentHead(models.Model):
         ordering = ("-user__date_joined",)
 
     def __str__(self):
-        return "{}".format(self.user)
+        return self.user.username
+    

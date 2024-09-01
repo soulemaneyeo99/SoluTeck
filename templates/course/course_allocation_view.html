@@ -1,22 +1,26 @@
+Voici la traduction pour un public francophone, en laissant de côté les mots-clés :
+
+---
+
 {% extends 'base.html' %}
-{% block title %}{{ title }} | Learning management system{% endblock title %}
+{% block title %}{{ title }} | Système de gestion de l'apprentissage{% endblock title %}
 
 {% block content %}
 
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="fil d'Ariane">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Allocation list</li>
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Liste des allocations</li>
     </ol>
 </nav>
 
 {% if request.user.is_superuser %}
 <div class="manage-wrap">
-    <a class="btn btn-primary" href="{% url 'course_allocation' %}"><i class="fas fa-plus"></i>Allocate Now</a>
+    <a class="btn btn-primary" href="{% url 'course_allocation' %}"><i class="fas fa-plus"></i>Allouer maintenant</a>
 </div>
 {% endif %}
 
-<div class="title-1"><i class="fas fa-tasks"></i>Course Allocations</div>
+<div class="title-1"><i class="fas fa-tasks"></i>Allocations de cours</div>
 <br>
 <br>
 
@@ -28,8 +32,8 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Lecturer</th>
-                <th>Courses</th>
+                <th>Lecteur</th>
+                <th>Cours</th>
                 {% if request.user.is_superuser %}
                 <th>Action</th>
                 {% endif %}
@@ -46,10 +50,10 @@
                 </td>
                 {% if request.user.is_superuser %}
                 <td><div class="update-delete">
-                    <a href="{% url 'edit_allocated_course' pk=course.pk %}" class="update" title="Edit or Update">
+                    <a href="{% url 'edit_allocated_course' pk=course.pk %}" class="update" title="Modifier ou mettre à jour">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="{% url 'course_deallocate' pk=course.pk %}" class="delete" title="Deallocate">
+                    <a href="{% url 'course_deallocate' pk=course.pk %}" class="delete" title="Désallouer">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                     </div>
@@ -61,11 +65,11 @@
               <td></td>
               <td></td>
               <td>
-                <span class="text-danger">No Course Allocated.
+                <span class="text-danger">Aucun cours alloué.
                     {% if request.user.is_superuser %}
                     <a href="{% url 'course_allocation' %}">
                     <i class="primary" style="font-size: 22px;">
-                    Allocate now
+                    Allouer maintenant
                     </i>
                     {% endif %}
                     </a>

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{{ title }} | Learning management system{% endblock title %}
+{% block title %}{{ title }} | Système de gestion de l'apprentissage{% endblock title %}
 {% load crispy_forms_tags %}
 {% load static %}
 
@@ -7,12 +7,12 @@
 
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Account setting</li>
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{% trans "Paramètres du Compte" %}</li>
     </ol>
 </nav>
 
-<p class="title-1"><i class="fas fa-user-edit"></i>Account Settings</p>
+<p class="title-1"><i class="fas fa-user-edit"></i> {% trans "Paramètres du Compte" %}</p>
 
 {% include 'snippets/messages.html' %}
 
@@ -20,7 +20,7 @@
     <div class="row mb-4">
         <div class="col-md-6">
             <div class="card">
-                <div class="form-title">Email &amp; Personal Info</div>
+                <div class="form-title">{% trans "Email &amp; Informations Personnelles" %}</div>
                 <div class="card-body">
                     {{ form.email|as_crispy_field }}
                     {{ form.first_name|as_crispy_field }}
@@ -33,13 +33,13 @@
         </div>
         <div class="col-md-6">
             <div class="card">
-                <p class="form-title">Others</p>
+                <p class="form-title">{% trans "Autres" %}</p>
                 <div class="card-body">
                     {{ form.picture|as_crispy_field }}
                 </div>
             </div>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit">Update Profile</button>
+    <button class="btn btn-primary" type="submit">{% trans "Mettre à Jour le Profil" %}</button>
 </form>
 {% endblock content %}

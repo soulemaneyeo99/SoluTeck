@@ -5,16 +5,16 @@
 
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'programs' %}">Programs</a></li>
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'programs' %}">Programmes</a></li>
         <li class="breadcrumb-item"><a href="{% url 'program_detail' course.program.id %}">{{ course.program }}</a></li>
         <li class="breadcrumb-item"><a href="{{ course.get_absolute_url }}">{{ course }}</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'quiz_index' course.slug %}">Quizzes</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Quiz Form</li>
+        <li class="breadcrumb-item"><a href="{% url 'quiz_index' course.slug %}">Quiz</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Formulaire de Quiz</li>
     </ol>
 </nav>
 
-<div class="title-1">Quiz form for {{ course|truncatechars:15 }}</div>
+<div class="title-1">Formulaire de quiz pour {{ course|truncatechars:15 }}</div>
 <br><br>
 
 <div class="container">
@@ -24,34 +24,24 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <!-- <div class="container"> -->
-                            <div hidden>
-                                <label for="course">{{ form.course.label }}</label><br> {{ form.course }}
-                                <span class="danger">{{ form.course.errors }}</span>
-                                <span class="danger">{{ form.course.errors }}</span>
-                            </div>                    
-                            {{ form.category|as_crispy_field }}                    
-                            {{ form.title|as_crispy_field }}
-                            <!-- <div class="mb-2">
-                                <label for="max_questions">{{ form.max_questions.label }}</label>
-                                <input class="form-control" type="number" name="max_questions" min="0" id="id_max_questions">
-                                <span class="danger">{{ form.max_questions.errors }}</span>
-                                <small class="d-block text-muted">Number of questions to be answered on each attempt.</small>
-                            </div> -->
-                            {{ form.pass_mark|as_crispy_field }}
-                            {{ form.description|as_crispy_field }}
-                        <!-- </div> -->
+                        <div hidden>
+                            <label for="course">{{ form.course.label }}</label><br> {{ form.course }}
+                            <span class="danger">{{ form.course.errors }}</span>
+                        </div>                    
+                        {{ form.category|as_crispy_field }}                    
+                        {{ form.title|as_crispy_field }}
+                        {{ form.pass_mark|as_crispy_field }}
+                        {{ form.description|as_crispy_field }}
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <!-- <div class="container"> -->
                         <div hidden>
                             <label for="questions">{{ form.questions.label }}</label><br> {{ form.questions }}
                             <span class="danger">{{ form.questions.errors }}</span>
-                            <small class="d-block text-muted">Hold down "Control", or "Command" on a Mac, to select more than one.</small>
+                            <small class="d-block text-muted">Maintenez "Control", ou "Command" sur un Mac, pour sélectionner plusieurs.</small>
                         </div>
                         {{ form.random_order|as_crispy_field }}                    
                         {{ form.answers_at_end|as_crispy_field }}                    
@@ -62,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary my-4" id="{% if form.is_valid %}btn-transition{% endif %}" type="submit">Save &amp; Continue</button>
+        <button class="btn btn-primary my-4" id="{% if form.is_valid %}btn-transition{% endif %}" type="submit">Enregistrer &amp; Continuer</button>
     </form>
 </div>
 

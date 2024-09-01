@@ -1,22 +1,26 @@
+Voici la traduction pour un public francophone, en laissant de côté les mots-clés :
+
+---
+
 {% extends 'base.html' %}
-{% block title %}{{ title }} | Learning management system{% endblock title %}
+{% block title %}{{ title }} | Système de gestion de l'apprentissage{% endblock title %}
 
 {% block content %}
 
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="fil d'Ariane">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Session List</li>
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Liste des sessions</li>
     </ol>
 </nav>
 
 {% if request.user.is_superuser %}
 <div class="manage-wrap">
-    <a class="btn btn-primary" href="{% url 'add_session' %}"><i class="fas fa-plus"></i>Add New Session</a>
+    <a class="btn btn-primary" href="{% url 'add_session' %}"><i class="fas fa-plus"></i>Ajouter une nouvelle session</a>
 </div>
 {% endif %}
 
-<div class="title-1"><i class="fas fa-calendar-week"></i>Session List</div>
+<div class="title-1"><i class="fas fa-calendar-week"></i>Liste des sessions</div>
 
 {% if messages %}
     {% for message in messages %}
@@ -38,8 +42,8 @@
             <tr>
                 <th>#</th>
                 <th> Session </th>
-                <th> Is Current Session </th>
-                <th> Next Session Begins </th>
+                <th> Session actuelle </th>
+                <th> Début de la prochaine session </th>
                 {% if request.user.is_superuser %}
                 <th> Actions </th>
                 {% endif %}
@@ -60,9 +64,10 @@
                 <td>{{ session.next_session_begins }}</td>
 
                 {% if request.user.is_superuser %}
-                <td> <div class="update-delete">
-                    <a href="{% url 'edit_session' pk=session.pk %}" class="update" title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                    <a href="{% url 'delete_session' pk=session.pk %}" class="delete" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                <td>
+                    <div class="update-delete">
+                        <a href="{% url 'edit_session' pk=session.pk %}" class="update" title="Modifier"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{% url 'delete_session' pk=session.pk %}" class="delete" title="Supprimer"><i class="fas fa-trash-alt"></i></a>
                     </div>
                 </td>
                 {% endif %}
@@ -73,11 +78,11 @@
                   <td></td>
                   <td>
                   <span class="text-danger">
-                    No Session.
+                    Aucune session.
                     {% if request.user.is_superuser %}
                     <a href="{% url 'add_session' %}">
                     <i class="primary" style="font-size: 22px;">
-                       Add Session Now.
+                       Ajouter une session maintenant.
                     </i>
                     {% endif %}
                     </a>

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{{ title }} | Learning management system{% endblock title %}
+{% block title %}{{ title }} | Système de gestion de l'apprentissage{% endblock title %}
 {% load crispy_forms_tags %}
 {% load static %}
 
@@ -7,13 +7,13 @@
 
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item"><a href="{% url 'lecturer_list' %}">Lecturers</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Update</li>
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'lecturer_list' %}">Enseignants</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Mise à jour</li>
     </ol>
 </nav>
 
-<div class="title-1"><i class="fas fa-cogs"></i>Lecturer Update Form</div>
+<div class="title-1"><i class="fas fa-cogs"></i>Formulaire de mise à jour de l'enseignant</div>
 <br>
 <br>
 
@@ -23,7 +23,7 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <div class="card">
-                <p class="form-title">Email &amp; Personal Info</p>
+                <p class="form-title">Email & Informations personnelles</p>
                 <div class="card-body">
                     {{ form.email|as_crispy_field }}
                     {{ form.first_name|as_crispy_field }}
@@ -35,13 +35,13 @@
         </div>
         <div class="col-md-6">
             <div class="card">
-                <p class="form-title">Others</p>
+                <p class="form-title">Autres</p>
                 <div class="card-body">
                     {{ form.picture|as_crispy_field }}
                 </div>
             </div>
         </div>
     </div>
-    <input class="btn btn-primary" type="submit" value="Save">
+    <input class="btn btn-primary" type="submit" value="Enregistrer">
 </form>
 {% endblock content %}

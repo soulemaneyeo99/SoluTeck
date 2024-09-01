@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
-{% block title %}{{ title }} | Learning management system{% endblock title %}
+{% block title %}{{ title }} | Système de gestion de l'apprentissage{% endblock title %}
 {% load crispy_forms_tags %}
 
 {% block content %}
 
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'programs' %}">Programs</a></li>
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'programs' %}">Programmes</a></li>
         <li class="breadcrumb-item"><a href="{% url 'program_detail' course.program.id %}">{{ course.program }}</a></li>
         <li class="breadcrumb-item"><a href="{% url 'course_detail' course.slug %}">{{ course }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">File upload</li>
+        <li class="breadcrumb-item active" aria-current="page">{% trans "Téléchargement de Fichiers" %}</li>
     </ol>
 </nav>
     
-<p class="title-1">File upload for {{ course|truncatechars:25 }}</p>
+<p class="title-1">{% trans "Téléchargement de Fichiers pour" %} {{ course|truncatechars:25 }}</p>
 <br><br>
 
 {% include 'snippets/messages.html' %}
@@ -22,17 +22,18 @@
 <div class="row">
     <div class="col-md-8 p-0 mx-auto">
         <div class="card">
-            <p class="form-title">File Upload Form</p>
+            <p class="form-title">{% trans "Formulaire de Téléchargement de Fichiers" %}</p>
 
             <div class="card-body">
                 <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
                     {{ form|crispy }}
                     
                     <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Upload</button>
-                        <a class="btn btn-danger" href="{% url 'course_detail' course.slug %}" style="float: right;">Cancel</a>
+                        <button class="btn btn-primary" type="submit">{% trans "Télécharger" %}</button>
+                        <a class="btn btn-danger" href="{% url 'course_detail' course.slug %}" style="float: right;">{% trans "Annuler" %}</a>
                     </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
