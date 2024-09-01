@@ -1,0 +1,102 @@
+{% block content %}
+
+<style>
+.user-picture {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #fff;
+  margin-top: -50px;
+  object-fit: cover;
+}
+
+table .info{
+    margin-left: -240px;
+}
+
+/* Spécifique à la classe .dashboard-description */
+.dashboard-description strong {
+  font-weight: 600;
+}
+
+/* Ajustements pour les en-têtes dans les cartes */
+.card .h5 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+</style>
+
+{% if user.is_authenticated %}
+<div class="row">
+  <div class="card-header">
+    <table>
+        <tr>
+            <td>
+                <img src="{{ user.picture.path }}" class="user-picture">
+            </td>
+            <td class="info">
+                <p>{{ user.get_full_name|title }}</p>
+                <p><strong>Dernière connexion :</strong> {{ user.last_login|date }}</p>
+                <p><strong>Rôle :</strong> {{ user.get_user_role }}</p>
+            </td>
+        </tr>
+    </table>
+    <hr>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      {% if user.is_lecturer %}
+      <p class="h5">Mes Cours</p>
+      {% if courses %}
+      <ul class="list-group">
+        {% for course in courses %}
+        <li class="list-group-item">{{ course }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <div class="text-danger">Aucun cours assigné !</div>
+      {% endif %}
+      <hr class="my-0">
+      {% endif %}
+
+      <p class="h5">Informations Personnelles</p>
+      <div class="dashboard-description">
+        <p><strong>Prénom :</strong> {{ user.first_name|title }}</p>
+        <p><strong>Nom :</strong> {{ user.last_name|title }}</p>
+        <p><strong>ID No. :</strong> {{ user.username }}</p>
+      </div>
+
+      {% if user.is_student %}
+      <hr>
+      <p class="h5">Informations sur le Candidat</p>
+      <div class="dashboard-description">
+        <p><strong>École :</strong> École Préparatoire Hawas</p>
+        <p><strong>Niveau :</strong> {{ level.level }}</p>
+      </div>
+      {% endif %}
+
+      <hr>
+      <p class="h5">Informations de Contact</p>
+      <div class="dashboard-description">
+        <p><strong>Email :</strong> {{ user.email }}</p>
+        <p><strong>Tél No. :</strong> {{ user.phone }}</p>
+        <p><strong>Adresse/Ville :</strong> {{ user.address }}</p>
+      </div>
+
+      <hr>
+      <p class="h5">Dates Importantes</p>
+      <div class="dashboard-description">
+        <p><strong>Dernière connexion :</strong> {{ user.last_login }}</p>
+        {% if current_semester and current_session %}
+        <p><strong>Année Académique :</strong> {{ current_semester }} Semestre {{ current_session }}</p>
+        {% endif %}
+        <p><strong>Date d'Inscription :</strong> {{ user.date_joined|date }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock content %}

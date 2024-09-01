@@ -1,0 +1,55 @@
+Voici la traduction pour un public francophone, en laissant de côté les mots-clés :
+
+---
+
+{% extends 'base.html' %}
+{% block title %}{{ title }} | Système de gestion de l'apprentissage{% endblock title %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="fil d'Ariane">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'programs' %}">Programmes</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Formulaire de cours</li>
+    </ol>
+</nav>
+
+<div class="title-1">Formulaire de cours</div>
+<br>
+<br>
+
+{% include 'snippets/messages.html' %}
+
+<form action="" method="POST">{% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <p class="form-title">Détails du cours</p>
+                <div class="p-3">
+                    {{ form.title|as_crispy_field }}
+                    {{ form.code|as_crispy_field }}
+                    {{ form.summary|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <p class="form-title">Autres informations</p>
+                <div class="p-3">
+                    {{ form.program|as_crispy_field }}
+                    {{ form.credit|as_crispy_field }}
+                    {{ form.year|as_crispy_field }}
+                    {{ form.semester|as_crispy_field }}
+                    {{ form.level|as_crispy_field }}
+                    {{ form.is_elective|as_crispy_field }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <input class="btn btn-primary mt-3" type="submit" value="Enregistrer">
+</form>
+
+{% endblock content %}

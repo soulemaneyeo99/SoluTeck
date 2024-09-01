@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} | Système de gestion de l'apprentissage{% endblock title %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="fil d'Ariane">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ user.get_full_name }}</li>
+    </ol>
+</nav>
+
+{% include 'snippets/messages.html' %}
+
+<div class="row">
+
+    <div class="col-md-3 mx-auto">
+        <div class="card p-2">
+            <div class="text-center">
+                <img src="{{ user.picture.url }}" class="w-100">
+                <ul class="px-2 list-unstyled">
+                    <li>{{ user.get_full_name|title }}</li>
+                    <li><strong>Dernière connexion : </strong>{{ user.last_login|date }}</li>
+                    <li><strong>Rôle : </strong>{{ user.get_user_role }}</li>
+                </ul>
+            </div>
+            <hr>
+            {% if request.user.is_superuser %}
+            <div class="d-flex flex-column">
+                {% if user.is_student %}
+                <a href="{% url 'student_edit' pk=user.id %}">
+                    <i class="fas fa-user-edit unstyled"></i><span class="mobile-hide">Modifier le profil</span>
+                </a>
+                <a href="{% url 'student_program_edit' user.id %}">
+                    <i class="fas fa-pen-to-square unstyled"></i><span class="mobile-hide">Changer de programme</span>
+                </a>
+                {% endif %}
+                {% if user.is_lecturer %}
+                <a href="{% url 'staff_edit' pk=user.id %}">
+                    <i class="fas fa-user-edit unstyled"></i><span class="mobile-hide">Modifier le profil</span>
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-9 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                {% if user.is_lecturer %}
+                <p class="fw-bold"><i class="fas fa-book-open"></i> Mes Cours</p>
+                {% if courses %}
+                <ul>
+                    {% for course in courses %}
+                    <li><a href="{{ course.get_absolute_url }}">{{ course }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <div class="text-danger">Aucun cours assigné !</div>
+                {% endif %}
+                <hr>
+                {% endif %}
+    
+                <p class="fw-bold"><i class="fas fa-user"></i> Informations Personnelles</p>
+                <div class="dashboard-description">
+                    <p><strong>Prénom :</strong> {{ user.first_name|title }}</p>
+                    <p><strong>Nom :</strong> {{ user.last_name|title }}</p>
+                    <p><strong>ID No. :</strong> {{ user.username }}</p>
+                </div>
+                {% if user.is_student %}
+                <hr>
+                <p class="fw-bold"><i class="fas fa-graduation-cap"></i> Informations sur le Candidat</p>
+                <div class="dashboard-description">
+                    <p><strong>École : </strong>École Préparatoire Hawas</p>
+                    <p><strong>Niveau : </strong>{{ level.level }}</p>
+                    <p><strong>Programme : </strong>{{ student.program }}</p>
+                </div>
+                {% endif %}
+    
+                <hr>
+                <p class="fw-bold"><i class="fas fa-phone-square-alt"></i> Informations de Contact</p>
+                <div class="dashboard-description">
+                    <p><strong>Email :</strong> {{ user.email }}</p>
+                    <p><strong>Tél :</strong> {{ user.phone }}</p>
+                    <p><strong>Adresse/Ville :</strong> {{ user.address }}</p>
+                </div>
+    
+                <hr>
+                <p class="fw-bold"><i class="fa fa-calendar-day"></i> Dates Importantes</p>
+                <div class="dashboard-description">
+                    <p><strong>Dernière connexion :</strong> {{ user.last_login }}</p>
+                    {% if current_semester and current_session %}
+                    <p><strong>Année Académique :</strong> {{ current_semester }} Semestre {{ current_session }}</p>
+                    {% endif %}
+                    <p><strong>Date d'inscription :</strong> {{ user.date_joined|date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mx-auto"></div>
+
+</div>
+{% endif %}
+
+{% endblock content %}
