@@ -1,10 +1,10 @@
 from django import forms
 from django.db import transaction
 
-from .models import NewsAndEvents, Session, Semester, SEMESTER
+from .models import NewsAndEvents, Session, Semester, SEMESTRE
 
 
-# news and events
+# Nouvelles et événements
 class NewsAndEventsForm(forms.ModelForm):
     class Meta:
         model = NewsAndEvents
@@ -22,7 +22,7 @@ class NewsAndEventsForm(forms.ModelForm):
 
 
 class SessionForm(forms.ModelForm):
-    next_session_begins = forms.DateTimeField(
+    next_session_begins = forms.DateField(
         widget=forms.TextInput(
             attrs={
                 "type": "date",
@@ -39,21 +39,21 @@ class SessionForm(forms.ModelForm):
 class SemesterForm(forms.ModelForm):
     semester = forms.CharField(
         widget=forms.Select(
-            choices=SEMESTER,
+            choices=SEMESTRE,
             attrs={
                 "class": "browser-default custom-select",
             },
         ),
-        label="semester",
+        label="Semestre",
     )
-    is_current_semester = forms.CharField(
+    is_current_semester = forms.ChoiceField(
         widget=forms.Select(
-            choices=((True, "Yes"), (False, "No")),
+            choices=((True, "Oui"), (False, "Non")),
             attrs={
                 "class": "browser-default custom-select",
             },
         ),
-        label="is current semester ?",
+        label="Est-ce le semestre actuel ?",
     )
     session = forms.ModelChoiceField(
         queryset=Session.objects.all(),
@@ -65,7 +65,7 @@ class SemesterForm(forms.ModelForm):
         required=True,
     )
 
-    next_semester_begins = forms.DateTimeField(
+    next_semester_begins = forms.DateField(
         widget=forms.TextInput(
             attrs={
                 "type": "date",

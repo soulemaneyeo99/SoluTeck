@@ -4,22 +4,22 @@ from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import AbstractUser
 from django.db.models import Q
 
-NEWS = "News"
-EVENTS = "Event"
+NOUVELLES = "Nouvelles"
+ÉVÉNEMENTS = "Événements"
 
 POST = (
-    (NEWS, "News"),
-    (EVENTS, "Event"),
+    (NOUVELLES, "Nouvelles"),
+    (ÉVÉNEMENTS, "Événements"),
 )
 
-FIRST = "First"
-SECOND = "Second"
-THIRD = "Third"
+PREMIER = "Premier"
+DEUXIÈME = "Deuxième"
+TROISIÈME = "Troisième"
 
-SEMESTER = (
-    (FIRST, "First"),
-    (SECOND, "Second"),
-    (THIRD, "Third"),
+SEMESTRE = (
+    (PREMIER, "Premier"),
+    (DEUXIÈME, "Deuxième"),
+    (TROISIÈME, "Troisième"),
 )
 
 
@@ -43,7 +43,7 @@ class NewsAndEventsManager(models.Manager):
     def get_by_id(self, id):
         qs = self.get_queryset().filter(
             id=id
-        )  # NewsAndEvents.objects == self.get_queryset()
+        )
         if qs.count() == 1:
             return qs.first()
         return None
@@ -75,7 +75,7 @@ class Session(models.Model):
 
 
 class Semester(models.Model):
-    semester = models.CharField(max_length=10, choices=SEMESTER, blank=True)
+    semester = models.CharField(max_length=10, choices=SEMESTRE, blank=True)
     is_current_semester = models.BooleanField(default=False, blank=True, null=True)
     session = models.ForeignKey(
         Session, on_delete=models.CASCADE, blank=True, null=True

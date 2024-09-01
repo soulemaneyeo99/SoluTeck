@@ -26,11 +26,12 @@
                 <div class="card-body">
                     <p>Change <a href="{{ student.student.get_absolute_url }}">{{ student.student.get_full_name }}'s</a> program</p>
                     <hr>
-                    {{ form.program|as_crispy_field }}
+                    {{ form.program|as_crispy_field }}  <!-- Utilisation de crispy_forms pour le rendu -->
                 </div>
             </div>
         </div>
     </div>
     <input class="btn btn-primary" type="submit" value="Save">
 </form>
+
 {% endblock content %}
